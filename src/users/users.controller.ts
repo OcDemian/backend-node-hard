@@ -6,6 +6,7 @@ import {User} from "./users.model";
 import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 import {Roles} from "../auth/roles-auth.decorator";
 import {RolesGuard} from "../auth/roles.guard";
+import {AddRoleDto} from "./dto/add-role.dto";
 
 @ApiTags('Пользователи')
 @Controller('users')
@@ -33,9 +34,9 @@ export class UsersController {
     @ApiResponse({status: 200})
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
-    @Get()
-    addRole(){
-
+    @Get('/role')
+    addRole(@Body() dto: AddRoleDto){
+        return this.usersService.addRole(dto);
     }
 
 }
